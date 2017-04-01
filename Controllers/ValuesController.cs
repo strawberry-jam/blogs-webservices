@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blogs.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogs.Controllers
@@ -9,11 +10,15 @@ namespace Blogs.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        BlogDatabaseContext dbContext;
+        public ValuesController(BlogDatabaseContext dbContext) {
+            this.dbContext = dbContext;
+        }
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Blog> Get()
         {
-            return new string[] { "value1", "value2" };
+            return dbContext.Blogs;
         }
 
         // GET api/values/5
