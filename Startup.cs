@@ -18,6 +18,7 @@ namespace Blogs
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("secrets.json")
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
