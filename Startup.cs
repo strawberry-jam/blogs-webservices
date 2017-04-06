@@ -36,7 +36,21 @@ namespace Blogs
                     connectionString, c => c.MigrationsAssembly("AspNet5MultipleProject")
                 )
             );
-            services.AddMvc();
+
+            JsonOutputFormatter jsonOutputFormatter = new JsonOutputFormatter
+            {
+                SerializerSettings = new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                }
+            };
+            
+            services.AddMvc(
+                options => {
+                    options.OutputFormatters.Clear();
+                    options.OutputFormatters.Insert(0, jsonOutputFormatter);
+                }
+            );
         }
 
 
