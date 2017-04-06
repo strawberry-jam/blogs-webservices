@@ -7,7 +7,7 @@ namespace Blogs.Models
     {
         public BlogDatabaseContext(DbContextOptions<BlogDatabaseContext> options) : base(options)
         { 
-
+            
         }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<User> Users { get; set; }
