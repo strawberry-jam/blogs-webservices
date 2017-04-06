@@ -36,7 +36,6 @@ namespace Blogs
                     connectionString, c => c.MigrationsAssembly("AspNet5MultipleProject")
                 )
             );
-            services.AddScoped<IData
             services.AddMvc();
         }
 
