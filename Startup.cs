@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Blogs.Models;
+using Blogs.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+
 namespace Blogs
 {
     public class Startup
@@ -37,20 +34,7 @@ namespace Blogs
                 )
             );
 
-            JsonOutputFormatter jsonOutputFormatter = new JsonOutputFormatter
-            {
-                SerializerSettings = new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                }
-            };
-            
-            services.AddMvc(
-                options => {
-                    options.OutputFormatters.Clear();
-                    options.OutputFormatters.Insert(0, jsonOutputFormatter);
-                }
-            );
+            services.AddMvc();
         }
 
 
