@@ -31,8 +31,12 @@ namespace Blogs.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Post([FromBody]Blog value)
         {
+            value.Id = Guid.NewGuid().ToString();
+            dbContext.Blogs.Add(value);
+            await dbContext.SaveChangesAsync();
+            return Created("blog", value);
         }
 
         // PUT api/values/5
