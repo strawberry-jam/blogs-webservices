@@ -28,9 +28,9 @@ namespace Blogs
         {
             // Add framework services.
             var connectionString = Configuration["Database-Connection"];
-            services.AddDbContext<BlogDatabaseContext>(options => 
+            services.AddDbContext<BlogDatabaseContext>(options =>
                 options.UseNpgsql(
-                    connectionString, c => c.MigrationsAssembly("AspNet5MultipleProject")
+                    connectionString, c => c.MigrationsAssembly("Blogs")
                 )
             );
 

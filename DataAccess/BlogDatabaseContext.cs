@@ -5,11 +5,6 @@ namespace Blogs.DataAccess
 {
     public class BlogDatabaseContext : DbContext
     {
-        public BlogDatabaseContext()
-        {
-
-        }
-
         public BlogDatabaseContext(DbContextOptions<BlogDatabaseContext> options) : base(options)
         {
         }
