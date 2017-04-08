@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Blogs.DataAccess;
 using Blogs.Models;
 
 namespace Blogs.Services
@@ -14,7 +16,6 @@ namespace Blogs.Services
 
         public void Create(string blogId, Post post)
         {
-            throw new NotImplementedException();
         }
 
         public void Delete(string blogId, string postId)
@@ -24,7 +25,10 @@ namespace Blogs.Services
 
         public Post Get(string blogId, string postId)
         {
-            throw new NotImplementedException();
+            return _dbContext.Blogs.Where(b => b.Id == blogId)
+                                   .SelectMany(b => b.Posts)
+                                   .Where(p => p.Id == postId)
+                                   .FirstOrDefault();
         }
 
         public void Update(string blogId, Post post)
