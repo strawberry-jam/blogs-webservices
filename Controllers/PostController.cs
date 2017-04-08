@@ -5,7 +5,7 @@ using Blogs.Services;
 
 namespace Blogs.Controllers
 {
-    [RouteAttribute("api/v1/posts")]
+    [RouteAttribute("api/v1/{blogId}/posts")]
     public class PostController : Controller
     {
         private readonly IPostService _postService;
@@ -16,28 +16,28 @@ namespace Blogs.Controllers
         }
 
         [HttpGet("{id")]
-        public Post Get(string id)
+        public Post Get(string blogId, string postId)
         {
-            return _postService.Get(id);
+            return _postService.Get(blogId, postId);
         }
 
         [HttpPost]
-        public void Create(Post post)
+        public void Create(string blogId, Post post)
         {
             post.Id = Guid.NewGuid().ToString();
-            _postService.Create(post);
+            _postService.Create(blogId, post);
         }
 
         [HttpPut]
-        public void Update(Post post)
+        public void Update(string blogId, Post post)
         {
-            _postService.Update(post);
+            _postService.Update(blogId, post);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public void Delete(string blogId, string postId)
         {
-            _postService.Delete(id);
+            _postService.Delete(blogId, postId);
         }
     }
 }

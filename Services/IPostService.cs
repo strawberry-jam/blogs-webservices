@@ -4,9 +4,9 @@ namespace Blogs.Services
 {
     public interface IPostService
     {
-        Post Get(string id);
-        void Create(Post post);
-        void Update(Post post);
-        void Delete(string id); 
+        Post Get(string blogId, string postId);
+        void Create(string BlogId, Post post);
+        void Update(string blogId, Post post);
+        void Delete(string blogId, string postId); 
     }
 }
