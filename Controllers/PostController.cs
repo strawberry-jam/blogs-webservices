@@ -15,7 +15,7 @@ namespace Blogs.Controllers
             _postService = postService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{postId}")]
         public Post Get(string blogId, string postId)
         {
             return _postService.Get(blogId, postId);

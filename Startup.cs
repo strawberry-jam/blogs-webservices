@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Blogs.Models;
+using Blogs.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Blogs.Services;
+
 namespace Blogs
 {
     public class Startup
@@ -30,11 +28,17 @@ namespace Blogs
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            var connection = Configuration["Database-Connection"];
-            services.AddMvc();
+            var connectionString = Configuration["Database-Connection"];
+            services.AddDbContext<BlogDatabaseContext>(options =>
+                options.UseNpgsql(
+                    connectionString, c => c.MigrationsAssembly("Blogs")
+                )
+            );
 
-            services.AddDbContext<BlogDatabaseContext>(options => options.UseNpgsql(connection, c => c.MigrationsAssembly("AspNetCore")));
+            services.AddMvc();
+            services.AddScoped<IPostService, PostService>();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

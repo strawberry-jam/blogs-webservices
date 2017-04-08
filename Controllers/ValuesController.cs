@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blogs.Models;
+using Blogs.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogs.Controllers
@@ -30,8 +31,12 @@ namespace Blogs.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Post([FromBody]Blog value)
         {
+            value.Id = Guid.NewGuid().ToString();
+            dbContext.Blogs.Add(value);
+            await dbContext.SaveChangesAsync();
+            return Created("blog", value);
         }
 
         // PUT api/values/5
