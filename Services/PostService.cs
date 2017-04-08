@@ -12,22 +12,22 @@ namespace Blogs.Services
             _dbContext = dbContext;
         }
 
-        void Create(string blogId, Post post)
+        public void Create(string blogId, Post post)
         {
             throw new NotImplementedException();
         }
 
-        void Delete(string blogId, string postId)
+        public void Delete(string blogId, string postId)
         {
             throw new NotImplementedException();
         }
 
-        Post Get(string blogId, string postId)
+        public Post Get(string blogId, string postId)
         {
             throw new NotImplementedException();
         }
 
-        void Update(string blogId, Post post)
+        public void Update(string blogId, Post post)
         {
             throw new NotImplementedException();
         }

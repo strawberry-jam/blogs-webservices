@@ -5,7 +5,7 @@ using Blogs.Services;
 
 namespace Blogs.Controllers
 {
-    [RouteAttribute("api/v1/{blogId}/posts")]
+    [RouteAttribute("api/v1/blogs/{blogId}/posts")]
     public class PostController : Controller
     {
         private readonly IPostService _postService;
@@ -15,7 +15,7 @@ namespace Blogs.Controllers
             _postService = postService;
         }
 
-        [HttpGet("{id")]
+        [HttpGet("{id}")]
         public Post Get(string blogId, string postId)
         {
             return _postService.Get(blogId, postId);

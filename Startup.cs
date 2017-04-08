@@ -30,9 +30,10 @@ namespace Blogs
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            var connection = Configuration["Database-Connection"];
             services.AddMvc();
 
-            services.AddDbContext<BlogDatabaseContext>(options => options.UseNpgsql(Configuration["Database-Connection"]));
+            services.AddDbContext<BlogDatabaseContext>(options => options.UseNpgsql(connection, c => c.MigrationsAssembly("AspNetCore")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
