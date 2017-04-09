@@ -21,15 +21,46 @@ namespace Blogs.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("OwnerId");
+                    b.Property<string>("AuthorId");
 
                     b.Property<string>("Title");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
-
                     b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Blogs.Models.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AuthorId");
+
+                    b.Property<string>("Content");
+
+                    b.Property<string>("PostId");
+
+                    b.Property<DateTime>("PublishedTime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Blogs.Models.Permission", b =>
+                {
+                    b.Property<string>("BlogId");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("BlogId", "UserId");
+
+                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("Blogs.Models.Post", b =>
@@ -51,11 +82,7 @@ namespace Blogs.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("BlogId");
-
-                    b.ToTable("Post");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Blogs.Models.User", b =>
@@ -70,24 +97,6 @@ namespace Blogs.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Blogs.Models.Blog", b =>
-                {
-                    b.HasOne("Blogs.Models.User", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId");
-                });
-
-            modelBuilder.Entity("Blogs.Models.Post", b =>
-                {
-                    b.HasOne("Blogs.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
-                    b.HasOne("Blogs.Models.Blog", "Blog")
-                        .WithMany("Posts")
-                        .HasForeignKey("BlogId");
                 });
         }
     }
