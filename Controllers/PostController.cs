@@ -24,6 +24,7 @@ namespace Blogs.Controllers
         [HttpPost]
         public void Create(string blogId, Post post)
         {
+            // post.AuthorId = ...
             post.Id = Guid.NewGuid().ToString();
             _postService.Create(blogId, post);
         }

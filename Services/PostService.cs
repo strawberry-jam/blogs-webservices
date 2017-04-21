@@ -12,7 +12,7 @@ namespace Blogs.Services
         {
             _dbContext = dbContext;
         }
-
+        
         public void Create(string blogId, Post post)
         {
             _dbContext.Posts.Add(post);

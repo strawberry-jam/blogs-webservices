@@ -14,7 +14,7 @@ namespace Blogs.Controllers
             _blogService = blogService;
         }
 
-        [HttpGet("{blogId")]
+        [HttpGet("{blogId}")]
         public Blog Get(string blogId)
         {
             return _blogService.Get(blogId);
@@ -34,7 +34,7 @@ namespace Blogs.Controllers
             _blogService.Update(blog);
         }
 
-        [HttpDeleteAttribute("{blogId")]
+        [HttpDeleteAttribute("{blogId}")]
         public void Delete(string blogId)
         {
             _blogService.Delete(blogId);
